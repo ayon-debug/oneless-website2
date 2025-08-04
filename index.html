@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneless - Revolutionary Quit Smoking App | Real-Time Behavioral Coach</title>
+    <meta name="description" content="The world's first quit smoking app that works WITH your habits. Smart shake detection, AI coaching, and gradual reduction for heavy smokers. Track, analyze, reduce.">
+    <meta name="keywords" content="quit smoking app, smoking tracker, behavioral coach, gradual cessation, heavy smokers, shake detection, smoking habits">
+    <meta name="author" content="Ayon">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Oneless - Revolutionary Quit Smoking App">
+    <meta property="og:description" content="The world's first quit smoking app that works WITH your habits. Smart AI coaching for gradual smoking reduction.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oneless.app">
+    <meta property="og:image" content="https://oneless.app/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Oneless - Revolutionary Quit Smoking App">
+    <meta name="twitter:description" content="Smart AI coaching for gradual smoking reduction. Works with heavy smokers.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23667eea'/><text x='50' y='65' text-anchor='middle' fill='white' font-size='40' font-weight='bold'>O</text></svg>">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #ff6b35;
+            --success-color: #00d084;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8faff;
+            --bg-tertiary: #f0f4ff;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 20px 60px rgba(0, 0, 0, 0.12);
+            --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.16);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --border-radius-lg: 32px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 32px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            transition: var(--transition-fast);
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition-fast);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--bg-secondary);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 32px 80px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            animation: slideInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+            animation: slideInUp 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 0.8s ease-out 0.8s both;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 32px;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--bg-tertiary);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 48px 40px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 120px 32px;
+            background: var(--bg-secondary);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 auto 32px;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .step h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Revolutionary Features */
+        .revolutionary {
+            padding: 120px 32px;
+            background: var(--text-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .revolutionary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(102, 126, 234, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
+        }
+
+        .revolutionary .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .revolutionary .section-title {
+            color: white;
+        }
+
+        .revolutionary .section-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .revolutionary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .revolutionary-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 32px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .revolutionary-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .revolutionary-item h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .revolutionary-item p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 120px 32px;
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .download-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .download .section-title {
+            margin-bottom: 20px;
+        }
+
+        .download .section-description {
+            margin-bottom: 48px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .download-btn {
+            background: var(--glass-bg);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            color: var(--text-primary);
+            padding: 20px 40px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pricing-info {
+            background: var(--bg-tertiary);
+            padding: 32px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+        }
+
+        .pricing-info h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .pricing-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 80px 32px 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 12px;
+            display: block;
+            transition: var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .features,
+            .how-it-works,
+            .revolutionary,
+            .download {
+                padding: 80px 20px;
+            }
+
+            .features-grid,
+            .steps-container,
+            .revolutionary-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-details {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* Scroll animations */
+        @media (prefers-reduced-motion: no-preference) {
+            .fade-in {
+                opacity: 0;
+                transform: translateY(40px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .slide-in-left {
+                opacity: 0;
+                transform: translateX(-40px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+
+            .slide-in-left.visible {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .slide-in-right {
+                opacity: 0;
+                transform: translateX(40px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+
+            .slide-in-right.visible {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--bg-tertiary);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-content">
+            <a href="#" class="logo">Oneless</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#revolutionary">Why Different</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <a href="#download" class="nav-cta">Download App</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                🏆 World's First Smart Smoking Tracker
+            </div>
+            <h1>Oneless</h1>
+            <p class="hero-subtitle">Revolutionary Real-Time Smoking Tracker & Behavioral Coach</p>
+            <p class="hero-description">
+                The world's first quit smoking app that works WITH your current smoking habits, not against them. 
+                Smart AI coaching, shake detection, and gradual reduction designed for heavy smokers.
+            </p>
+            <div class="hero-cta">
+                <a href="#download" class="btn btn-primary">
+                    📱 Download Now
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    ✨ Discover Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-badge">Revolutionary Approach</div>
+                <h2 class="section-title">Why Oneless Changes Everything</h2>
+                <p class="section-description">
+                    Unlike apps that demand cold turkey, Oneless meets you where you are and guides gradual improvement through intelligent behavioral insights.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Works WITH Your Habits</h3>
+                    <p>No judgment, just data. Designed for heavy smokers (10+ cigarettes/day) where traditional apps fail. Start reducing gradually with personalized insights.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Smart AI Coaching</h3>
+                    <p>Real-time behavioral feedback: "Great pacing!" or "Too fast!" based on YOUR patterns, not generic rules. AI learns your unique smoking rhythm.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3>Shake Detection Technology</h3>
+                    <p>World's first shake-to-log feature. Simply shake your phone to instantly track cigarettes - no need to open the app. Perfect for real-world situations.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3>Personal Pattern Analysis</h3>
+                    <p>Combines yesterday's data + same weekday patterns to predict and coach your smoking behavior. You vs Yesterday You - self-competition that works.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3>Real-Time Savings Tracker</h3>
+                    <p>See exactly how much money you're saving as you reduce. Financial motivation based on your actual progress and local cigarette prices.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Dynamic Auto-Goals</h3>
+                    <p>Goals automatically adjust based on your actual behavior patterns. No unrealistic targets - just steady, achievable improvement milestones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-badge">Simple Process</div>
+                <h2 class="section-title">How Oneless Works</h2>
+                <p class="section-description">
+                    Four simple steps to start your gradual reduction journey with intelligent behavioral coaching.
+                </p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Track Your Reality</h3>
+                    <p>Log cigarettes with a tap, shake, or batch entry. No complex forms - just timestamps and honest tracking of your current habits.</p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Get Instant AI Insights</h3>
+                    <p>Receive immediate feedback: "Great pacing!" or "Too fast!" based on YOUR patterns, not generic rules. AI learns your unique smoking rhythm.</p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>See Your Progress</h3>
+                    <p>Compare today vs yesterday, this week vs last week. Visual progress tracking with financial savings that celebrates small wins.</p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Gradual Improvement</h3>
+                    <p>Increase average time between cigarettes naturally. No drastic changes - just steady, sustainable progress with dynamic goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revolutionary Features -->
+    <section id="revolutionary" class="revolutionary">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-badge" style="background: rgba(255, 255, 255, 0.2); color: white;">Game Changer</div>
+                <h2 class="section-title">What Makes Oneless Revolutionary</h2>
+                <p class="section-description">
+                    Every other quit smoking app assumes you're ready to quit completely. Oneless is different - it's built for real smokers with real habits.
+                </p>
+            </div>
+            
+            <div class="revolutionary-grid">
+                <div class="revolutionary-item fade-in">
+                    <h4>🚀 First Shake Detection App</h4>
+                    <p>Revolutionary shake-to-log technology with 3 sensitivity levels. Track cigarettes instantly without opening the app - perfect for real-world situations.</p>
+                </div>
+                
+                <div class="revolutionary-item fade-in">
+                    <h4>🧠 Personal AI Behavioral Coach</h4>
+                    <p>AI that learns YOUR unique patterns and provides personalized coaching moments. Not generic advice - insights based on your actual smoking rhythm.</p>
+                </div>
+                
+                <div class="revolutionary-item fade-in">
+                    <h4>💪 Heavy Smoker Friendly</h4>
+                    <p>Designed for 10+ cigarettes/day users that other apps abandon. Works with your current habits instead of demanding impossible changes.</p>
+                </div>
+                
+                <div class="revolutionary-item fade-in">
+                    <h4>📊 You vs Yesterday You</h4>
+                    <p>Self-competition model that actually works. Compare against your own patterns, celebrate micro-improvements, and build sustainable progress.</p>
+                </div>
+                
+                <div class="revolutionary-item fade-in">
+                    <h4>⚡ Real-Time Intervention</h4>
+                    <p>Instant coaching during actual smoking moments. Get immediate context-aware feedback that helps you understand your behavior patterns.</p>
+                </div>
+                
+                <div class="revolutionary-item fade-in">
+                    <h4>🔄 Batch Entry System</h4>
+                    <p>Forgot to log? Add multiple cigarettes retroactively with smart timing distribution. Designed for real-world forgetfulness and busy schedules.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-content fade-in">
+                <div class="section-badge">Start Today</div>
+                <h2 class="section-title">Download Oneless</h2>
+                <p class="section-description">
+                    Join thousands who are successfully reducing smoking with the world's first smart behavioral coach. 
+                    Start your gradual reduction journey today.
+                </p>
+                
+                <div class="download-buttons">
+                    <a href="#" class="download-btn">
+                        🤖 <span>Google Play Store</span>
+                    </a>
+                    <a href="mailto:xodaxoda@gmail.com?subject=Oneless%20App%20Notification" class="download-btn">
+                        📧 <span>Get Notified</span>
+                    </a>
+                </div>
+                
+                <div class="pricing-info">
+                    <h4>Simple, Transparent Pricing</h4>
+                    <div class="pricing-details">
+                        <span>🆓 5-day completely free trial</span>
+                        <span>💳 7-day paid trial</span>
+                        <span>💰 $2.50/month subscription</span>
+                        <span>🔒 No payment required for free trial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section fade-in">
+                <h3>Oneless</h3>
+                <p>The revolutionary smoking tracker that works with your habits, not against them. Smart AI coaching for gradual smoking reduction.</p>
+                <p><strong>Developed by Ayon</strong></p>
+                <p>United Arab Emirates</p>
+            </div>
+            
+            <div class="footer-section fade-in">
+                <h3>Key Features</h3>
+                <a href="#features">Smart Shake Detection</a>
+                <a href="#features">AI Behavioral Coaching</a>
+                <a href="#features">Real-time Progress Analytics</a>
+                <a href="#features">Financial Savings Tracker</a>
+                <a href="#features">Dynamic Auto-Goals</a>
+                <a href="#features">Heavy Smoker Support</a>
+            </div>
+            
+            <div class="footer-section fade-in">
+                <h3>App Information</h3>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#revolutionary">Why It's Different</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="#download">Download App</a>
+            </div>
+            
+            <div class="footer-section fade-in">
+                <h3>Support & Contact</h3>
+                <p><strong>Email:</strong> xodaxoda@gmail.com</p>
+                <p><strong>Response Time:</strong> 48-72 hours</p>
+                <p><strong>Support:</strong> Technical issues, device switching, account deletion</p>
+                <a href="mailto:xodaxoda@gmail.com">Contact Support</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom fade-in">
+            <p>&copy; 2025 Ayon. All rights reserved. | Oneless - Quit Smoking Tracker | Designed for real smokers with real habits</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation classes
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Performance optimization - Lazy load images if any were added
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Add some interactive Easter eggs
+        let shakeCount = 0;
+        window.addEventListener('devicemotion', function(event) {
+            const acceleration = event.accelerationIncludingGravity;
+            const totalAcceleration = Math.abs(acceleration.x) + Math.abs(acceleration.y) + Math.abs(acceleration.z);
+            
+            if (totalAcceleration > 25) {
+                shakeCount++;
+                if (shakeCount === 3) {
+                    // Easter egg - show a fun message about shake detection
+                    const message = document.createElement('div');
+                    message.innerHTML = '📱 Hey! I see you testing the shake feature! 🎉';
+                    message.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: var(--primary-gradient);
+                        color: white;
+                        padding: 20px 30px;
+                        border-radius: 15px;
+                        font-size: 18px;
+                        font-weight: 600;
+                        z-index: 10000;
+                        animation: slideInUp 0.5s ease;
+                        box-shadow: var(--shadow-strong);
+                    `;
+                    document.body.appendChild(message);
+                    
+                    setTimeout(() => {
+                        message.remove();
+                        shakeCount = 0;
+                    }, 3000);
+                }
+            }
+        });
+
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log(`🚀 Oneless website loaded in ${Math.round(perfData.loadEventEnd - perfData.loadEventStart)}ms`);
+                }, 0);
+            });
+        }
+
+        // SEO-friendly structured data
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "MobileApplication",
+            "name": "Oneless",
+            "description": "Revolutionary quit smoking app with AI coaching, shake detection, and gradual reduction for heavy smokers",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Android",
+            "offers": {
+                "@type": "Offer",
+                "price": "2.50",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "billingDuration": "P1M"
+                }
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "1000+"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "Ayon"
+            }
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.text = JSON.stringify(structuredData);
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
